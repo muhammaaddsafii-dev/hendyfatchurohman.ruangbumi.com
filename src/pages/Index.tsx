@@ -15,25 +15,34 @@ import artworkWaterfall from "@/assets/artwork-waterfall.jpg";
 import artworkMountain from "@/assets/artwork-mountain.jpg";
 import artworkForest from "@/assets/artwork-forest.jpg";
 import artworkSunset from "@/assets/artwork-sunset.jpg";
+import asset1 from "@/assets/asset1.jpg";
+import asset2 from "@/assets/asset2.jpg";
+import asset3 from "@/assets/asset3.jpg";
+import asset4 from "@/assets/asset4.jpg";
+import asset5 from "@/assets/asset5.jpg";
+import asset6 from "@/assets/asset6.jpg";
+import asset7 from "@/assets/asset7.jpg";
+import asset8 from "@/assets/asset8.jpg";
+import asset9 from "@/assets/asset9.jpg";
 
 const products = [
-  { id: "chopes", title: "'Chopes", price: "$50.00 USD", image: artworkChopes },
-  { id: "campout", title: "Campout", price: "$50.00 USD", image: artworkCampout },
-  { id: "el-farol", title: "El Farol", price: "$50.00 USD", image: artworkLighthouse },
-  { id: "flow", title: "Flow", price: "$55.00 USD", image: artworkFlow },
-  { id: "fort-point", title: "Fort Point", price: "$50.00 USD", image: artworkFortpoint, pricePrefix: "From" },
+  { id: "chopes", title: "'Chopes", price: "$50.00 USD", image: asset1 },
+  { id: "campout", title: "Campout", price: "$50.00 USD", image: asset5 },
+  { id: "el-farol", title: "El Farol", price: "$50.00 USD", image: asset1 },
+  { id: "flow", title: "Flow", price: "$55.00 USD", image: asset5 },
+  { id: "fort-point", title: "Fort Point", price: "$50.00 USD", image: asset1, pricePrefix: "From" },
 ];
 
 const heroImages = [
-  artworkForest,
-  artworkFortpoint,
-  artworkChopes,
-  artworkCampout,
-  artworkSunset,
-  artworkWaterfall,
-  artworkMountain,
-  artworkWhale,
-  artworkLighthouse,
+  asset1,
+  asset2,
+  asset3,
+  asset4,
+  asset5,
+  asset6,
+  asset7,
+  asset8,
+  asset9,
 ];
 
 const faqItems = [
@@ -66,19 +75,29 @@ const Index = () => {
                 className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1"
                 style={{ transform: "rotate(45deg) scale(0.7)" }}
               >
-                {heroImages.map((img, index) => (
-                  <div
-                    key={index}
-                    className="overflow-hidden bg-muted"
-                  >
-                    <img
-                      src={img}
-                      alt=""
-                      className="w-full h-full object-cover"
-                      style={{ transform: "rotate(-45deg) scale(1.5)" }}
-                    />
-                  </div>
-                ))}
+                {Array.from({ length: 9 }).map((_, index) => {
+                  const row = Math.floor(index / 3);
+                  const col = index % 3;
+                  return (
+                    <div
+                      key={index}
+                      className="overflow-hidden bg-muted relative"
+                    >
+                      <img
+                        src={asset8}
+                        alt=""
+                        className="absolute max-w-none object-cover"
+                        style={{
+                          width: "calc(300% + 0.5rem)",
+                          height: "calc(300% + 0.5rem)",
+                          left: `calc(-${col * 100}% - ${col * 0.25}rem)`,
+                          top: `calc(-${row * 100}% - ${row * 0.25}rem)`,
+                          transform: "rotate(-45deg) scale(1.5)",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

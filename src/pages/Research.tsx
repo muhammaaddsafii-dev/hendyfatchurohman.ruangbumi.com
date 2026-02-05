@@ -1,169 +1,118 @@
- import Header from "@/components/Header";
- import Footer from "@/components/Footer";
- import FAQSection from "@/components/FAQSection";
- import ContactForm from "@/components/ContactForm";
- import { Download, FileText, Clock, Users, HelpCircle } from "lucide-react";
- 
- // Import research images
- import researchDecay from "@/assets/research-decay.jpg";
- import researchLight from "@/assets/research-light.jpg";
- import researchEphemeral from "@/assets/research-ephemeral.jpg";
- 
- const researchProjects = [
-   {
-     id: 1,
-     image: researchDecay,
-     tags: ["VISUAL DOCUMENTATION", "MORPHOLOGICAL ANALYSIS"],
-     date: "JAN 2024 — MAR 2024",
-     caseNumber: "CASE 01",
-     title: "Symmetry in Organic Decay",
-     description: "An ethnographic approach to documenting botanical decomposition cycles and their mathematical representation in contemporary illustration.",
-   },
-   {
-     id: 2,
-     image: researchLight,
-     tags: ["FIELD OBSERVATION", "OPTIC STUDY"],
-     date: "SEPT 2023 — DEC 2023",
-     caseNumber: "CASE 02",
-     title: "The Volatility of Light",
-     description: "Investigating the refractive index of alpine mist and its psychological impact on spatial perception in landscape rendering.",
-   },
-   {
-     id: 3,
-     image: researchEphemeral,
-     tags: ["MATERIAL EXPERIMENT", "HISTORICAL ARCHIVE"],
-     date: "MAY 2023 — AUG 2023",
-     caseNumber: "CASE 03",
-     title: "Fibrous Ephemerality",
-     description: "A comparative study between 17th-century rag paper and modern synthetic substrates regarding pigment carbonation and longevity.",
-   },
- ];
- 
- const researchFAQ = [
-   {
-     question: "How do you choose your research topics?",
-     answer: "My research topics emerge from the intersection of my artistic practice and academic curiosity. I'm particularly drawn to phenomena that blur the line between natural processes and artistic expression.",
-   },
-   {
-     question: "Are your research papers available for download?",
-     answer: "Yes, all published research papers are available for download. Click the 'Download Research Paper' link below each case study to access the full PDF.",
-   },
-   {
-     question: "What is the typical duration of a research cycle?",
-     answer: "Each research cycle typically spans 3-6 months, depending on the complexity of the subject matter and the depth of investigation required.",
-   },
-   {
-     question: "Do you accept research collaborations?",
-     answer: "I'm always open to meaningful collaborations with researchers, institutions, and fellow artists. Please reach out through the inquiry form below to discuss potential partnerships.",
-   },
- ];
- 
- const Research = () => {
-   return (
-     <div className="min-h-screen bg-background">
-       <Header />
- 
-       <main>
-         {/* Hero Section */}
-         <section className="bg-primary text-primary-foreground py-16 px-4">
-           <div className="max-w-7xl mx-auto">
-             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-               <div>
-                 <h1 className="text-3xl md:text-4xl font-display mb-2">RESEARCH PORTFOLIO</h1>
-                 <p className="text-sm uppercase tracking-widest text-primary-foreground/70">
-                   CASE STUDIES & ACADEMIC FINDINGS
-                 </p>
-               </div>
-               <p className="text-sm uppercase tracking-widest text-primary-foreground/70">
-                 TOTAL PROJECTS: 03
-               </p>
-             </div>
-           </div>
-         </section>
- 
-         {/* Research Cards */}
-         <section className="py-16 px-4">
-           <div className="max-w-7xl mx-auto">
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-               {researchProjects.map((project) => (
-                 <article key={project.id} className="group">
-                   {/* Image */}
-                   <div className="aspect-[4/5] overflow-hidden mb-4">
-                     <img
-                       src={project.image}
-                       alt={project.title}
-                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                     />
-                   </div>
- 
-                   {/* Tags */}
-                   <div className="flex flex-wrap gap-2 mb-4">
-                     {project.tags.map((tag, index) => (
-                       <span key={index} className="payment-badge">
-                         {tag}
-                       </span>
-                     ))}
-                   </div>
- 
-                   {/* Meta */}
-                   <div className="flex justify-between text-xs text-muted-foreground mb-2">
-                     <span>{project.date}</span>
-                     <span>{project.caseNumber}</span>
-                   </div>
- 
-                   {/* Content */}
-                   <h3 className="text-lg font-display mb-2">{project.title}</h3>
-                   <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
- 
-                   {/* Actions */}
-                   <div className="space-y-2">
-                     <button className="text-xs uppercase tracking-widest hover:underline">
-                       READ CASE STUDY
-                     </button>
-                     <button className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground">
-                       <Download className="w-3 h-3" />
-                       DOWNLOAD RESEARCH PAPER
-                     </button>
-                   </div>
-                 </article>
-               ))}
-             </div>
-           </div>
-         </section>
- 
-         {/* Research FAQ */}
-         <section className="py-16 px-4 max-w-7xl mx-auto">
-           <FAQSection title="Research FAQ" items={researchFAQ} />
-         </section>
- 
-         {/* Inquiry Form */}
-         <section className="py-16 px-4 max-w-7xl mx-auto">
-           <ContactForm title="Inquiries" buttonText="SEND INQUIRY" />
-         </section>
- 
-         {/* Newsletter Footer */}
-         <section className="border-t border-border py-12 px-4">
-           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-             <div>
-               <h3 className="section-title mb-4">RESEARCH NEWSLETTER</h3>
-               <form className="flex items-center gap-4 max-w-sm">
-                 <input
-                   type="email"
-                   placeholder="Email for research updates"
-                   className="input-minimal flex-1"
-                 />
-                 <button type="submit" className="text-muted-foreground hover:text-foreground">
-                   →
-                 </button>
-               </form>
-             </div>
-           </div>
-         </section>
-       </main>
- 
-       <Footer />
-     </div>
-   );
- };
- 
- export default Research;
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Download, Eye, FileText, Bookmark, Share2, MoreHorizontal, User, Search } from "lucide-react";
+
+// Mock Data
+const researchPapers = [
+  {
+    id: 1,
+    title: "Symmetry in Organic Decay: An ethnographic approach to botanical decomposition",
+    journal: "Visual Arts Research Quarterly",
+    year: "2024",
+    views: 142,
+    downloads: 45,
+    abstract: "This paper presents an ethnographic approach to documenting botanical decomposition cycles. By analyzing the mathematical representation in contemporary illustration, we observe a distinct symmetry in organic decay patterns that correlates with golden ratio harmonics found in early botanical sketches.",
+    tags: ["Visual Arts", "Botany", "Illustration"],
+  },
+  {
+    id: 2,
+    title: "The Volatility of Light: Refractive indices in alpine mist",
+    journal: "Journal of Environmental Aesthetics",
+    year: "2023",
+    views: 89,
+    downloads: 21,
+    abstract: "Investigating the refractive index of alpine mist and its psychological impact on spatial perception. The study focuses on landscape rendering techniques that capture the ephemeral nature of light in high-altitude environments, proposing a new framework for 'atmospheric perspective' in digital media.",
+    tags: ["Environmental Aesthetics", "Optics", "Digital Art"],
+  },
+  {
+    id: 3,
+    title: "Fibrous Ephemerality: Comparative analysis of substrate longevity",
+    journal: "Archives of Material Science",
+    year: "2023",
+    views: 204,
+    downloads: 88,
+    abstract: "A comparative study between 17th-century rag paper and modern synthetic substrates regarding pigment carbonation and longevity. We analyze degradation rates under varying UV exposure and humidity levels to predict the archival stability of mixed-media artworks.",
+    tags: ["Material Science", "Art Conservation", "Paper History"],
+  },
+];
+
+const Research = () => {
+  return (
+    <div className="min-h-screen bg-[#F4F5F7] dark:bg-zinc-950 font-sans text-[#404040] dark:text-gray-300">
+      {/* Custom Academia-like Header override or sub-header if needed, but keeping global Header for consistency */}
+      <div className="bg-white dark:bg-zinc-900 shadow-sm border-b border-gray-200 dark:border-zinc-800 sticky top-0 z-50">
+        <Header />
+      </div>
+
+      <main className="max-w-[800px] mx-auto pt-6 px-4 pb-20">
+
+
+
+        {/* Papers Stream */}
+        <div className="space-y-4">
+          {researchPapers.map((paper) => (
+            <div key={paper.id} className="bg-white dark:bg-zinc-900 rounded border border-gray-200 dark:border-zinc-800 p-6 hover:shadow-sm transition-shadow">
+              <div className="flex items-start justify-between mb-2">
+                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold">
+                  Original Research
+                </div>
+                <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                  <MoreHorizontal className="w-5 h-5" />
+                </button>
+              </div>
+
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1 cursor-pointer hover:underline">
+                {paper.title}
+              </h2>
+
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 italic">
+                {paper.journal}, {paper.year}
+              </div>
+
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4 line-clamp-3">
+                {paper.abstract}
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-6">
+                {paper.tags.map(tag => (
+                  <span key={tag} className="bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 text-xs px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between pt-4 border-t border-gray-100 dark:border-zinc-800">
+                <div className="flex w-full sm:w-auto gap-3">
+                  <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-[#2D3E50] dark:bg-zinc-700 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-[#1a252f] dark:hover:bg-zinc-600 transition-colors">
+                    <Download className="w-4 h-4" />
+                    <span className="hidden sm:inline">Download PDF</span>
+                    <span className="sm:hidden">Download</span>
+                  </button>
+                  <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 px-3 py-2 rounded text-sm font-medium transition-colors border sm:border-transparent border-gray-200 dark:border-zinc-700">
+                    <Bookmark className="w-4 h-4" />
+                    Save
+                  </button>
+                </div>
+
+                <div className="flex w-full sm:w-auto items-center justify-between sm:justify-start gap-4 text-xs text-gray-500 dark:text-gray-400 font-medium">
+                  <div className="flex items-center gap-1">
+                    <Eye className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                    {paper.views} Views
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <FileText className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                    {paper.downloads} Downloads
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Research;

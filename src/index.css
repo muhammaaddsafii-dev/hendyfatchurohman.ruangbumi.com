@@ -135,7 +135,7 @@
   }
 
   .product-card-image {
-    @apply aspect-square overflow-hidden bg-muted;
+    @apply aspect-[3/4] overflow-hidden bg-muted;
   }
 
   .product-card-image img {

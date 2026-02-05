@@ -25,7 +25,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="brand-logo text-xl">
+          <Link to="/" className="brand-logo text-2xl font-bold">
             Hendy Fatchurohman
           </Link>
 
