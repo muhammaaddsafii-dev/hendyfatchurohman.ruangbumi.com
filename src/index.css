@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Assistant:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hendy Fatchurohman Portfolio - Elegant Minimalist Design System */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 8%;
+
+    --radius: 0.5rem;
+
+    /* Custom Design Tokens */
+    --font-display: 'Assistant', sans-serif;
+    --font-body: 'Assistant', sans-serif;
+
+    --header-height: 64px;
+    --container-max: 1200px;
+    --section-padding: 80px;
+  }
+
+  .dark {
+    --background: 0 0% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 83%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-xs uppercase tracking-[0.15em] text-foreground/80 hover:text-foreground transition-colors duration-200;
+    font-family: 'Proxima Nova', sans-serif;
+  }
+
+  .nav-link-active {
+    @apply text-foreground border-b border-foreground;
+  }
+
+  .section-title {
+    @apply text-xs uppercase tracking-[0.2em] text-muted-foreground;
+  }
+
+  .page-title {
+    @apply text-4xl md:text-5xl font-light tracking-tight;
+    font-family: var(--font-display);
+  }
+
+  .brand-logo {
+    @apply text-2xl md:text-3xl font-normal;
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .input-minimal {
+    @apply w-full px-0 py-3 border-0 border-b border-border bg-transparent text-sm placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-widest font-medium hover:bg-primary/90 transition-colors;
+  }
+
+  .product-card {
+    @apply cursor-pointer;
+  }
+
+  .product-card-image {
+    @apply aspect-square overflow-hidden bg-muted;
+  }
+
+  .product-card-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .filter-btn {
+    @apply text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1;
+  }
+
+  .payment-badge {
+    @apply px-2 py-1 text-[10px] uppercase tracking-wider border border-border rounded-sm text-muted-foreground;
+  }
+}

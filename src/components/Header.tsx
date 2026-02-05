@@ -1,0 +1,108 @@
+import { Link, useLocation } from "react-router-dom";
+import { Search, ShoppingBag, Moon, Sun, Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const Header = () => {
+  const location = useLocation();
+  const [isDark, setIsDark] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { name: "HOME", path: "/" },
+    { name: "SKETCH", path: "/sketch" },
+    { name: "PRODUCT", path: "/product" },
+    { name: "RESEARCH", path: "/research" },
+    { name: "ABOUT", path: "/about" },
+  ];
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle("dark");
+  };
+
+  return (
+    <header className="sticky top-0 z-50 bg-background border-b border-border/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="brand-logo text-xl">
+            Hendy Fatchurohman
+          </Link>
+
+          {/* Navigation - Desktop */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`nav-link ${location.pathname === item.path ? "nav-link-active" : ""
+                  }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions - Desktop */}
+          <div className="hidden md:flex items-center gap-4">
+            <button className="p-2 hover:bg-muted rounded-full transition-colors">
+              <Search className="w-4 h-4" />
+            </button>
+            <button className="p-2 hover:bg-muted rounded-full transition-colors">
+              <ShoppingBag className="w-4 h-4" />
+            </button>
+            <button
+              onClick={toggleTheme}
+              className="p-2 hover:bg-muted rounded-full transition-colors"
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:bg-muted rounded-full transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border p-6 shadow-lg animate-in slide-in-from-top-2 z-40">
+          <nav className="flex flex-col gap-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`nav-link text-center text-sm ${location.pathname === item.path ? "nav-link-active" : ""
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="flex items-center justify-center gap-6 pt-4 border-t border-border mt-2">
+              <button className="p-2 hover:bg-muted rounded-full transition-colors">
+                <Search className="w-5 h-5" />
+              </button>
+              <button className="p-2 hover:bg-muted rounded-full transition-colors">
+                <ShoppingBag className="w-5 h-5" />
+              </button>
+              <button
+                onClick={toggleTheme}
+                className="p-2 hover:bg-muted rounded-full transition-colors"
+              >
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
