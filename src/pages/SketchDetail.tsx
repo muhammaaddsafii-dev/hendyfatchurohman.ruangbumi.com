@@ -134,13 +134,13 @@ const SketchDetail = () => {
                             <div className="h-64 w-full rounded-lg overflow-hidden border border-border/50 bg-muted/30 z-0 relative">
                                 <MapContainer
                                     center={[sketch.latitude, sketch.longitude]}
-                                    zoom={13}
+                                    zoom={10}
                                     scrollWheelZoom={false}
                                     style={{ height: "100%", width: "100%" }}
                                 >
                                     <TileLayer
-                                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+                                        url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
                                     />
                                     <Marker position={[sketch.latitude, sketch.longitude]}>
                                         <Popup>{sketch.title}</Popup>
