@@ -75,15 +75,9 @@ const Research = () => {
           {researchPapers?.map((paper) => (
             <div key={paper.id} className="bg-white dark:bg-zinc-900 rounded border border-gray-200 dark:border-zinc-800 p-6 hover:shadow-sm transition-shadow">
               <div className="flex items-start justify-between mb-2">
-                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold">
-                  Original Research
-                </div>
-                <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                  <MoreHorizontal className="w-5 h-5" />
-                </button>
               </div>
 
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1 cursor-pointer hover:underline">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1 cursor-pointer">
                 {paper.title}
               </h2>
 
@@ -112,26 +106,12 @@ const Research = () => {
                     rel="noopener noreferrer"
                     className={`flex-1 sm:flex-none justify-center flex items-center gap-2 bg-[#2D3E50] dark:bg-zinc-700 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-[#1a252f] dark:hover:bg-zinc-600 transition-colors ${!paper.file_url ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
                   >
-                    <Download className="w-4 h-4" />
-                    <span className="hidden sm:inline">Download PDF</span>
-                    <span className="sm:hidden">Download</span>
+                    <Eye className="w-4 h-4" />
+                    <span className="hidden sm:inline">Read Paper</span>
+                    <span className="sm:hidden">Read</span>
                   </a>
-                  <button className="flex-1 sm:flex-none justify-center flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 px-3 py-2 rounded text-sm font-medium transition-colors border sm:border-transparent border-gray-200 dark:border-zinc-700">
-                    <Bookmark className="w-4 h-4" />
-                    Save
-                  </button>
                 </div>
 
-                <div className="flex w-full sm:w-auto items-center justify-between sm:justify-start gap-4 text-xs text-gray-500 dark:text-gray-400 font-medium">
-                  <div className="flex items-center gap-1">
-                    <Eye className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    {paper.views} Views
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FileText className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    {paper.downloads} Downloads
-                  </div>
-                </div>
               </div>
             </div>
           ))}

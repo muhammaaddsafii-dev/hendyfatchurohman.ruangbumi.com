@@ -10,8 +10,7 @@ interface Profile {
   image: string | null;
   instagram: string | null;
   youtube: string | null;
-  education?: string[];
-  focus_areas?: string[];
+  department: string | null;
 }
 
 const About = () => {
@@ -83,42 +82,11 @@ const About = () => {
                 <img src={profile?.image || "https://placehold.co/400x400?text=No+Child"} alt={profile?.name || "Hendy Fatchurohman"} className="w-full h-full object-cover" />
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 bg-white dark:bg-zinc-800 p-1 rounded-full shadow-md">
-              <div className="text-gray-700 dark:text-gray-300 w-5 h-5 flex items-center justify-center">📷</div>
-            </div>
           </div>
 
           {/* Name */}
           <h1 className="text-3xl md:text-4xl font-normal text-gray-800 dark:text-gray-100 mb-2">{profile?.name || "Hendy Fatchurohman"}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">hendyfatchurohman.com</p>
-
-          {/* Search Bar (Fake) */}
-          <div className="w-full max-w-xl relative mb-8">
-            <div className="w-full bg-white dark:bg-zinc-900 rounded-full border border-gray-200 dark:border-zinc-700 hover:shadow-md px-12 py-3 shadow-sm transition-shadow flex items-center">
-              <Search className="text-gray-400 dark:text-gray-500 w-5 h-5 absolute left-4" />
-              <input
-                type="text"
-                className="w-full outline-none bg-transparent text-gray-700 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-500"
-                defaultValue="Search Profile"
-              />
-            </div>
-          </div>
-
-          {/* Action Pills */}
-          <div className="flex flex-wrap justify-center gap-3">
-            <button className="px-4 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 flex items-center gap-2 transition-colors">
-              Personal Info
-            </button>
-            <button className="px-4 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 flex items-center gap-2 transition-colors">
-              Data & Privacy
-            </button>
-            <button className="px-4 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 flex items-center gap-2 transition-colors">
-              Security
-            </button>
-            <button className="px-4 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 flex items-center gap-2 transition-colors">
-              People & Sharing
-            </button>
-          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">hendy.fatchurohman@mail.ugm.ac.id</p>
         </div>
 
         {/* Bio & Details Section */}
@@ -133,32 +101,11 @@ const About = () => {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-gray-100 dark:border-zinc-800">
               <div>
-                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Education</h3>
-                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                  {/* Using hardcoded if API return null, but API controller has hardcoded defaults for now */}
-                  {profile?.education?.map((edu, index) => (
-                    <li key={index}>{edu}</li>
-                  )) || (
-                      <>
-                        <li>MFA, Indonesian Institute of the Arts (2022)</li>
-                        <li>B.Des, Telkom University (2018)</li>
-                      </>
-                    )}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Focus Areas</h3>
-                <div className="flex flex-wrap gap-2">
-                  {profile?.focus_areas?.map((area, index) => (
-                    <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">{area}</span>
-                  )) || (
-                      <>
-                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Scientific Illustration</span>
-                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Visual Research</span>
-                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Mixed Media</span>
-                      </>
-                    )}
-                </div>
+                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Department</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {profile?.department || "No department available."}
+                </p>
+
               </div>
             </div>
           </div>
