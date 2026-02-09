@@ -86,7 +86,7 @@ const Product = () => {
               key={product.id}
               id={String(product.id)}
               title={product.title}
-              price={`$${Number(product.price).toFixed(2)} USD`}
+              price={`$${Number(product.price).toLocaleString("id-ID")}`}
               image={product.image || "https://placehold.co/600x600?text=No+Image"}
               pricePrefix={undefined}
             />

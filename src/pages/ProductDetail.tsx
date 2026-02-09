@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Minus, Plus, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingBag, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -119,7 +119,7 @@ const ProductDetail = () => {
                     {/* Info Column */}
                     <div className="flex flex-col justify-start sticky top-28 self-start">
                         <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-4">{product.title}</h1>
-                        <div className="text-2xl font-medium mb-8">${price.toFixed(2)} USD</div>
+                        <div className="text-2xl font-medium mb-8">${price.toLocaleString("id-ID")}</div>
 
                         <div className="prose prose-sm dark:prose-invert mb-8 text-muted-foreground leading-relaxed">
                             <div dangerouslySetInnerHTML={{ __html: product.description || "No description available." }} />
@@ -153,10 +153,15 @@ const ProductDetail = () => {
                                 </div>
                             </div>
 
-                            <button className="w-full bg-foreground text-background py-4 px-8 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                                <ShoppingBag className="w-4 h-4" />
-                                Add to Cart — ${(price * quantity).toFixed(2)}
-                            </button>
+                            <a
+                                href={`https://wa.me/6282177582119?text=${encodeURIComponent(`Halo, saya tertarik dengan karya ini: ${product.title}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-foreground text-background py-4 px-8 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                            >
+                                <MessageCircle className="w-4 h-4" />
+                                Order via WhatsApp — ${(price * quantity).toLocaleString("id-ID")}
+                            </a>
                         </div>
                     </div>
                 </div>

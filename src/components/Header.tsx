@@ -9,9 +9,9 @@ const Header = () => {
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "SKETCH", path: "/sketch" },
-    { name: "PRODUCT", path: "/product" },
-    { name: "RESEARCH", path: "/research" },
+    { name: "SKETCHES AND STORIES", path: "/sketch" },
+    { name: "PRODUCTS", path: "/product" },
+    { name: "RESEARCHES", path: "/research" },
     { name: "ABOUT", path: "/about" },
   ];
 
@@ -45,12 +45,9 @@ const Header = () => {
 
           {/* Actions - Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="p-2 hover:bg-muted rounded-full transition-colors">
-              <Search className="w-4 h-4" />
-            </button>
-            <button className="p-2 hover:bg-muted rounded-full transition-colors">
+            <Link to="/product" className="p-2 hover:bg-muted rounded-full transition-colors">
               <ShoppingBag className="w-4 h-4" />
-            </button>
+            </Link>
             <button
               onClick={toggleTheme}
               className="p-2 hover:bg-muted rounded-full transition-colors"

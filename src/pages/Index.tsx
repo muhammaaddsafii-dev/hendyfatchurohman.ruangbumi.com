@@ -49,16 +49,16 @@ const heroImages = [
 
 const faqItems = [
   {
-    question: "Are you accepting commission projects?",
-    answer: "Yes, I am currently accepting commission projects. Please reach out through the contact form with details about your project, timeline, and budget.",
+    question: "How can I purchase your artwork?",
+    answer: "You can purchase directly through this website by clicking the 'Order via WhatsApp' button on any product page. This will connect you directly to me to finalize the payment and delivery details.",
   },
   {
-    question: "Do you design tattoos?",
-    answer: "I occasionally design tattoos for clients. Each design is custom and unique. Contact me to discuss your ideas and we can see if it's a good fit.",
+    question: "Do you accept commission projects?",
+    answer: "Yes, I am open to commission work. Whether it's for a custom illustration, tattoo design, or commercial project, feel free to contact me via WhatsApp or Email to discuss your ideas.",
   },
   {
-    question: "My print didn't arrive or is damaged. What do I do?",
-    answer: "Please contact me immediately with your order number and photos of any damage. I will work with you to resolve the issue as quickly as possible.",
+    question: "How is the shipping handled?",
+    answer: "Since orders are processed manually, shipping costs and methods will be discussed and agreed upon via WhatsApp based on your location and the size of the artwork.",
   },
 ];
 
@@ -130,7 +130,7 @@ const Index = () => {
                 key={product.id}
                 id={String(product.id)}
                 title={product.title}
-                price={`$${Number(product.price).toFixed(2)} USD`}
+                price={`$${Number(product.price).toLocaleString("id-ID")}`}
                 image={product.image || "https://placehold.co/600x600?text=No+Image"}
                 pricePrefix={undefined}
               />
@@ -153,10 +153,6 @@ const Index = () => {
           <hr className="border-border" />
         </div>
 
-        {/* Contact */}
-        <div className="max-w-7xl mx-auto px-4">
-          <ContactForm />
-        </div>
       </main>
 
       <Footer />

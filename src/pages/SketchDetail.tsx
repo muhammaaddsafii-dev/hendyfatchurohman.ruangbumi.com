@@ -111,10 +111,6 @@ const SketchDetail = () => {
                                 <span className="flex items-center gap-1">
                                     <Calendar className="w-3.5 h-3.5" /> {year}
                                 </span>
-                                {/* Placeholder for Technique since it's not in DB yet */}
-                                <span className="flex items-center gap-1">
-                                    <Tag className="w-3.5 h-3.5" /> Digital / Mixed Media
-                                </span>
                                 <span className="flex items-center gap-1">
                                     <User className="w-3.5 h-3.5" /> Hendy Fatchurohman
                                 </span>
@@ -130,12 +126,6 @@ const SketchDetail = () => {
                             />
                         </div>
 
-                        <div className="border-t border-border pt-6 mt-6">
-                            <h3 className="text-sm font-medium text-foreground mb-4">License & Usage</h3>
-                            <p className="text-xs text-muted-foreground">
-                                All rights reserved. This artwork is for personal display only. For commercial licensing or usage inquiries, please contact the artist directly.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </main>
