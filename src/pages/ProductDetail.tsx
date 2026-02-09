@@ -118,25 +118,12 @@ const ProductDetail = () => {
 
                     {/* Info Column */}
                     <div className="flex flex-col justify-start sticky top-28 self-start">
-                        <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-4">{product.title}</h1>
+                        <h1 className="text-3xl md:text-4xl font-light tracking-tight mb-4">{product.title}</h1>
                         <div className="text-2xl font-medium mb-8">${price.toLocaleString("id-ID")}</div>
 
-                        <div className="prose prose-sm dark:prose-invert mb-8 text-muted-foreground leading-relaxed">
+                        <div className="prose prose-sm dark:prose-invert mb-8 text-muted-foreground leading-relaxed text-justify">
                             <div dangerouslySetInnerHTML={{ __html: product.description || "No description available." }} />
                         </div>
-
-                        {/* Specs - Commented out as they are not available in API yet
-                        <div className="space-y-4 mb-10 border-t border-b border-border py-6">
-                            <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Dimensions</span>
-                                <span className="font-medium">12 x 18 inches</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Medium</span>
-                                <span className="font-medium">Archival Print</span>
-                            </div>
-                        </div>
-                        */}
 
                         {/* Actions */}
                         <div className="space-y-6 mt-8">

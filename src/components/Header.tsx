@@ -35,7 +35,9 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`nav-link ${location.pathname === item.path ? "nav-link-active" : ""
+                className={`nav-link ${location.pathname === item.path || (item.path === "/product" && location.pathname.startsWith("/product"))
+                    ? "nav-link-active"
+                    : ""
                   }`}
               >
                 {item.name}
