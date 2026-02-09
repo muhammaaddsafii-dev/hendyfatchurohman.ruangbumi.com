@@ -25,6 +25,7 @@ interface Sketch {
     longitude: number | null;
     created_at: string;
     images: { id: number; url: string }[];
+    date: string | null;
 }
 
 const SketchDetail = () => {
@@ -70,7 +71,13 @@ const SketchDetail = () => {
         );
     }
 
-    const year = sketch.created_at ? new Date(sketch.created_at).getFullYear() : "N/A";
+    const formattedDate = sketch.date
+        ? new Date(sketch.date).toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        })
+        : "N/A";
 
     return (
         <div className="min-h-screen bg-background text-foreground">
@@ -121,7 +128,7 @@ const SketchDetail = () => {
                             <h1 className="text-xl font-light tracking-tight mb-2 font-semibold">{sketch.title}</h1>
                             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
                                 <span className="flex items-center gap-1">
-                                    <Calendar className="w-3.5 h-3.5" /> {year}
+                                    <Calendar className="w-3.5 h-3.5" /> {formattedDate}
                                 </span>
                                 <span className="flex items-center gap-1">
                                     <User className="w-3.5 h-3.5" /> Hendy Fatchurohman
