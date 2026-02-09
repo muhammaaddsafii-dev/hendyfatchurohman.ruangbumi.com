@@ -1,43 +1,70 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Search, MoreHorizontal, Download, Bookmark, Eye, FileText } from "lucide-react";
-import asset6 from "@/assets/asset6.jpg";
+import { Search } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
-// Mock Data from Research.tsx
-const researchPapers = [
-  {
-    id: 1,
-    title: "Symmetry in Organic Decay: An ethnographic approach to botanical decomposition",
-    journal: "Visual Arts Research Quarterly",
-    year: "2024",
-    views: 142,
-    downloads: 45,
-    abstract: "This paper presents an ethnographic approach to documenting botanical decomposition cycles. By analyzing the mathematical representation in contemporary illustration, we observe a distinct symmetry in organic decay patterns that correlates with golden ratio harmonics found in early botanical sketches.",
-    tags: ["Visual Arts", "Botany", "Illustration"],
-  },
-  {
-    id: 2,
-    title: "The Volatility of Light: Refractive indices in alpine mist",
-    journal: "Journal of Environmental Aesthetics",
-    year: "2023",
-    views: 89,
-    downloads: 21,
-    abstract: "Investigating the refractive index of alpine mist and its psychological impact on spatial perception. The study focuses on landscape rendering techniques that capture the ephemeral nature of light in high-altitude environments, proposing a new framework for 'atmospheric perspective' in digital media.",
-    tags: ["Environmental Aesthetics", "Optics", "Digital Art"],
-  },
-  {
-    id: 3,
-    title: "Fibrous Ephemerality: Comparative analysis of substrate longevity",
-    journal: "Archives of Material Science",
-    year: "2023",
-    views: 204,
-    downloads: 88,
-    abstract: "A comparative study between 17th-century rag paper and modern synthetic substrates regarding pigment carbonation and longevity. We analyze degradation rates under varying UV exposure and humidity levels to predict the archival stability of mixed-media artworks.",
-    tags: ["Material Science", "Art Conservation", "Paper History"],
-  },
-];
+interface Profile {
+  id: number;
+  name: string;
+  bio: string;
+  image: string | null;
+  instagram: string | null;
+  youtube: string | null;
+  education?: string[];
+  focus_areas?: string[];
+}
 
 const About = () => {
+  const { data: profile, isLoading, error } = useQuery({
+    queryKey: ["about"],
+    queryFn: async () => {
+      const response = await fetch("http://127.0.0.1:8000/api/about");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
+  });
+
+  // Default static data if API fails or is loading (optional, but good for perceived performance if SSR not used, 
+  // or better yet show loading state as requested in previous turns)
+  // However, to follow the pattern of other pages, let's show loading/error states.
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#F0F2F5] dark:bg-zinc-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col justify-between">
+        <div className="bg-white dark:bg-zinc-900 shadow-sm border-b border-gray-200 dark:border-zinc-800">
+          <Header />
+        </div>
+        <main className="flex-grow flex items-center justify-center p-20">
+          <p>Loading profile...</p>
+        </main>
+        <div className="w-full max-w-3xl mx-auto border-t border-gray-200 dark:border-zinc-800">
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#F0F2F5] dark:bg-zinc-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col justify-between">
+        <div className="bg-white dark:bg-zinc-900 shadow-sm border-b border-gray-200 dark:border-zinc-800">
+          <Header />
+        </div>
+        <main className="flex-grow flex items-center justify-center p-20">
+          <div className="text-center">
+            <p className="text-red-500 mb-2">Error loading profile.</p>
+            <p className="text-sm text-gray-500">{error instanceof Error ? error.message : "Currently unable to reach the server."}</p>
+          </div>
+        </main>
+        <div className="w-full max-w-3xl mx-auto border-t border-gray-200 dark:border-zinc-800">
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F0F2F5] dark:bg-zinc-950 font-sans text-gray-900 dark:text-gray-100">
       {/* Navbar - Standard Site Header */}
@@ -53,7 +80,7 @@ const About = () => {
           <div className="mb-6 relative">
             <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-blue-500 via-red-500 to-yellow-500">
               <div className="w-full h-full rounded-full border-2 border-white dark:border-zinc-900 bg-white dark:bg-zinc-900 overflow-hidden">
-                <img src={asset6} alt="Hendy Fatchurohman" className="w-full h-full object-cover" />
+                <img src={profile?.image || "https://placehold.co/400x400?text=No+Child"} alt={profile?.name || "Hendy Fatchurohman"} className="w-full h-full object-cover" />
               </div>
             </div>
             <div className="absolute bottom-0 right-0 bg-white dark:bg-zinc-800 p-1 rounded-full shadow-md">
@@ -62,7 +89,7 @@ const About = () => {
           </div>
 
           {/* Name */}
-          <h1 className="text-3xl md:text-4xl font-normal text-gray-800 dark:text-gray-100 mb-2">Hendy Fatchurohman</h1>
+          <h1 className="text-3xl md:text-4xl font-normal text-gray-800 dark:text-gray-100 mb-2">{profile?.name || "Hendy Fatchurohman"}</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">hendyfatchurohman.com</p>
 
           {/* Search Bar (Fake) */}
@@ -98,12 +125,9 @@ const About = () => {
         <div className="w-full max-w-3xl space-y-6">
           <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 p-8 shadow-sm">
             <h2 className="text-xl font-normal text-gray-800 dark:text-gray-100 mb-6">Bio</h2>
-            <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">
+            <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base whitespace-pre-line">
               <p>
-                Hendy Fatchurohman is a multidisciplinary artist and researcher whose work navigates the intersection of organic morphology and digital synthesis. Drawing from a rigorous practice of field observation and academic inquiry, he seeks to uncover the hidden geometries within natural decay and light phenomena.
-              </p>
-              <p>
-                His work has been exhibited in various galleries across Indonesia, including the National Gallery of Indonesia and Selasar Sunaryo Art Space. He holds a Master of Fine Arts from the Indonesian Institute of the Arts and currently works from his independent studio in Indonesia.
+                {profile?.bio || "No biography available."}
               </p>
             </div>
 
@@ -111,16 +135,29 @@ const About = () => {
               <div>
                 <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Education</h3>
                 <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                  <li>MFA, Indonesian Institute of the Arts (2022)</li>
-                  <li>B.Des, Telkom University (2018)</li>
+                  {/* Using hardcoded if API return null, but API controller has hardcoded defaults for now */}
+                  {profile?.education?.map((edu, index) => (
+                    <li key={index}>{edu}</li>
+                  )) || (
+                      <>
+                        <li>MFA, Indonesian Institute of the Arts (2022)</li>
+                        <li>B.Des, Telkom University (2018)</li>
+                      </>
+                    )}
                 </ul>
               </div>
               <div>
                 <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Focus Areas</h3>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Scientific Illustration</span>
-                  <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Visual Research</span>
-                  <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Mixed Media</span>
+                  {profile?.focus_areas?.map((area, index) => (
+                    <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">{area}</span>
+                  )) || (
+                      <>
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Scientific Illustration</span>
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Visual Research</span>
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded text-xs text-gray-700 dark:text-gray-300">Mixed Media</span>
+                      </>
+                    )}
                 </div>
               </div>
             </div>

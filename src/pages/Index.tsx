@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import FAQSection from "@/components/FAQSection";
 import ContactForm from "@/components/ContactForm";
+import { useQuery } from "@tanstack/react-query";
 
 // Import artwork images
 import artworkChopes from "@/assets/artwork-chopes.jpg";
@@ -25,13 +26,14 @@ import asset7 from "@/assets/asset7.jpg";
 import asset8 from "@/assets/asset8.jpg";
 import asset9 from "@/assets/asset9.jpg";
 
-const products = [
-  { id: "chopes", title: "'Chopes", price: "$50.00 USD", image: asset1 },
-  { id: "campout", title: "Campout", price: "$50.00 USD", image: asset5 },
-  { id: "el-farol", title: "El Farol", price: "$50.00 USD", image: asset1 },
-  { id: "flow", title: "Flow", price: "$55.00 USD", image: asset5 },
-  { id: "fort-point", title: "Fort Point", price: "$50.00 USD", image: asset1, pricePrefix: "From" },
-];
+interface Product {
+  id: number;
+  title: string;
+  price: string | number;
+  slug: string;
+  image: string;
+  description: string;
+}
 
 const heroImages = [
   asset1,
@@ -61,6 +63,17 @@ const faqItems = [
 ];
 
 const Index = () => {
+  const { data: products, isLoading, error } = useQuery({
+    queryKey: ["featured-products"],
+    queryFn: async () => {
+      const response = await fetch("http://127.0.0.1:8000/api/products?limit=5");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json() as Promise<Product[]>;
+    },
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -106,15 +119,20 @@ const Index = () => {
         {/* Featured Products */}
         <section className="py-16 px-4 max-w-7xl mx-auto">
           <h2 className="section-title mb-8">FEATURED PRODUCTS</h2>
+
+          {isLoading && <p className="text-center text-muted-foreground">Loading featured products...</p>}
+
+          {error && <p className="text-center text-red-500">Failed to load featured products.</p>}
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-            {products.map((product) => (
+            {products?.map((product) => (
               <ProductCard
                 key={product.id}
-                id={product.id}
+                id={String(product.id)}
                 title={product.title}
-                price={product.price}
-                image={product.image}
-                pricePrefix={product.pricePrefix}
+                price={`$${Number(product.price).toFixed(2)} USD`}
+                image={product.image || "https://placehold.co/600x600?text=No+Image"}
+                pricePrefix={undefined}
               />
             ))}
           </div>
