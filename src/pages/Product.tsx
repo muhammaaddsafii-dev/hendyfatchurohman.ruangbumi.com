@@ -26,6 +26,8 @@ const Product = () => {
   const [availability, setAvailability] = useState("all");
   const [priceFilter, setPriceFilter] = useState("all");
   const [sortBy, setSortBy] = useState("alphabetical-asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   const { data: products, isLoading, error } = useQuery({
     queryKey: ["products"],
@@ -86,6 +88,31 @@ const Product = () => {
   };
 
   const filteredProducts = getFilteredProducts();
+
+  // Pagination Logic
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (isLoading) {
     return (
@@ -153,8 +180,8 @@ const Product = () => {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
+          {currentProducts.length > 0 ? (
+            currentProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 id={String(product.id)}
@@ -172,13 +199,39 @@ const Product = () => {
         </div>
 
         {/* Pagination - Placeholder for now since API returns all */}
-        <div className="flex items-center justify-center gap-4">
-          <span className="text-sm font-medium border-b border-foreground">1</span>
-          {/* <span className="text-sm text-muted-foreground hover:text-foreground cursor-pointer">2</span> */}
-          <button className="p-1 hover:bg-muted rounded" disabled>
-            <ChevronRight className="w-4 h-4 opacity-50" />
-          </button>
-        </div>
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className="p-2 hover:bg-muted rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              <ChevronRight className="w-4 h-4 rotate-180" />
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => goToPage(number)}
+                className={`text-sm font-medium w-8 h-8 flex items-center justify-center rounded transition-colors ${currentPage === number
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
+
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className="p-2 hover:bg-muted rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </main>
 
       <Footer />

@@ -25,7 +25,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="brand-logo text-2xl font-bold">
+          <Link to="/" className="brand-logo text-2xl font-bold text-foreground">
             Hendy Fatchurohman
           </Link>
 
@@ -36,10 +36,10 @@ const Header = () => {
                 key={item.name}
                 to={item.path}
                 className={`nav-link ${location.pathname === item.path ||
-                    (item.path === "/product" && location.pathname.startsWith("/product")) ||
-                    (item.path === "/sketch" && location.pathname.startsWith("/sketch"))
-                    ? "nav-link-active"
-                    : ""
+                  (item.path === "/product" && location.pathname.startsWith("/product")) ||
+                  (item.path === "/sketch" && location.pathname.startsWith("/sketch"))
+                  ? "nav-link-active"
+                  : ""
                   }`}
               >
                 {item.name}

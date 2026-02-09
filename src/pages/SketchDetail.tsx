@@ -3,6 +3,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, User, Tag } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+// Fix Leaflet's default icon issue with Webpack/Vite
+// @ts-ignore
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+});
 
 interface Sketch {
     id: number;
@@ -116,6 +128,26 @@ const SketchDetail = () => {
                                 </span>
                             </div>
                         </div>
+
+                        {/* Map Section */}
+                        {sketch.latitude && sketch.longitude && (
+                            <div className="h-64 w-full rounded-lg overflow-hidden border border-border/50 bg-muted/30 z-0 relative">
+                                <MapContainer
+                                    center={[sketch.latitude, sketch.longitude]}
+                                    zoom={13}
+                                    scrollWheelZoom={false}
+                                    style={{ height: "100%", width: "100%" }}
+                                >
+                                    <TileLayer
+                                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
+                                    <Marker position={[sketch.latitude, sketch.longitude]}>
+                                        <Popup>{sketch.title}</Popup>
+                                    </Marker>
+                                </MapContainer>
+                            </div>
+                        )}
 
                         <div className="prose prose-gray dark:prose-invert">
                             <h3 className="text-lg font-medium text-foreground mb-2">Description</h3>

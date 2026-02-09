@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Download, Eye, FileText, Bookmark, MoreHorizontal } from "lucide-react";
+import { Download, Eye, FileText, Bookmark, MoreHorizontal, ChevronRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 interface Publication {
   id: number;
@@ -17,6 +18,9 @@ interface Publication {
 }
 
 const Research = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const { data: researchPapers, isLoading, error } = useQuery({
     queryKey: ["publications"],
     queryFn: async () => {
@@ -27,6 +31,30 @@ const Research = () => {
       return response.json() as Promise<Publication[]>;
     },
   });
+
+  const indexOfLastPaper = currentPage * itemsPerPage;
+  const indexOfFirstPaper = indexOfLastPaper - itemsPerPage;
+  const currentPapers = researchPapers?.slice(indexOfFirstPaper, indexOfLastPaper) || [];
+  const totalPages = researchPapers ? Math.ceil(researchPapers.length / itemsPerPage) : 0;
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (isLoading) {
     return (
@@ -72,7 +100,7 @@ const Research = () => {
 
         {/* Papers Stream */}
         <div className="space-y-4">
-          {researchPapers?.map((paper) => (
+          {currentPapers.map((paper) => (
             <div key={paper.id} className="bg-white dark:bg-zinc-900 rounded border border-gray-200 dark:border-zinc-800 p-6 hover:shadow-sm transition-shadow">
               <div className="flex items-start justify-between mb-2">
               </div>
@@ -121,6 +149,40 @@ const Research = () => {
             </div>
           )}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              <ChevronRight className="w-4 h-4 rotate-180 text-gray-600 dark:text-gray-400" />
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => goToPage(number)}
+                className={`text-sm font-medium w-8 h-8 flex items-center justify-center rounded transition-colors ${currentPage === number
+                  ? "bg-[#2D3E50] dark:bg-zinc-700 text-white"
+                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800"
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
+
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              <ChevronRight className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+            </button>
+          </div>
+        )}
       </main>
 
       <Footer />
