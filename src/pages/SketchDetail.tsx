@@ -64,7 +64,7 @@ const SketchDetail = () => {
                 <h1 className="text-2xl font-bold mb-4">Sketch not found</h1>
                 <p className="text-muted-foreground mb-4">{error?.message || "The requested sketch could not be loaded."}</p>
                 <Link to="/sketch" className="text-blue-500 hover:underline">
-                    Back to Gallery
+                    Back to Sketch
                 </Link>
             </div>
         );
@@ -81,7 +81,7 @@ const SketchDetail = () => {
                 <div className="mb-8">
                     <Link to="/sketch" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors group">
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                        Back to Gallery
+                        Back to Sketch
                     </Link>
                 </div>
 
@@ -118,7 +118,7 @@ const SketchDetail = () => {
                     {/* Details Section */}
                     <div className="space-y-8 sticky top-24 self-start">
                         <div>
-                            <h1 className="text-4xl font-light tracking-tight mb-2">{sketch.title}</h1>
+                            <h1 className="text-xl font-light tracking-tight mb-2 font-semibold">{sketch.title}</h1>
                             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
                                 <span className="flex items-center gap-1">
                                     <Calendar className="w-3.5 h-3.5" /> {year}

@@ -105,7 +105,7 @@ const Research = () => {
               <div className="flex items-start justify-between mb-2">
               </div>
 
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1 cursor-pointer">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-1">
                 {paper.title}
               </h2>
 

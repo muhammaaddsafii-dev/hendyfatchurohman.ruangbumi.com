@@ -198,7 +198,6 @@ const Product = () => {
           )}
         </div>
 
-        {/* Pagination - Placeholder for now since API returns all */}
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-4">

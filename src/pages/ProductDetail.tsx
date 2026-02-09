@@ -118,8 +118,8 @@ const ProductDetail = () => {
 
                     {/* Info Column */}
                     <div className="flex flex-col justify-start sticky top-28 self-start">
-                        <h1 className="text-3xl md:text-4xl font-light tracking-tight mb-4">{product.title}</h1>
-                        <div className="text-2xl font-medium mb-8">${price.toLocaleString("id-ID")}</div>
+                        <h1 className="text-xl md:text-xl font-light tracking-tight mb-4 font-semibold">{product.title}</h1>
+                        <div className="text-xl font-medium mb-8 text-green-500">${price.toLocaleString("id-ID")}</div>
 
                         <div className="prose prose-sm dark:prose-invert mb-8 text-muted-foreground leading-relaxed text-justify">
                             <div dangerouslySetInnerHTML={{ __html: product.description || "No description available." }} />
