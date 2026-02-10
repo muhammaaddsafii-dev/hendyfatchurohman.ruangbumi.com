@@ -25,6 +25,7 @@ import asset6 from "@/assets/asset6.jpg";
 import asset7 from "@/assets/asset7.jpg";
 import asset8 from "@/assets/asset8.jpg";
 import asset9 from "@/assets/asset9.jpg";
+import heroImage from "@/assets/heroku.png";
 
 interface Product {
   id: number;
@@ -66,7 +67,7 @@ const Index = () => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ["featured-products"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/products?limit=5");
+      const response = await fetch("http://127.0.0.1:8000/api/products?limit=6");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -79,41 +80,13 @@ const Index = () => {
       <Header />
 
       <main>
-        {/* Hero Diamond Collage */}
-        <section className="py-16 px-4">
-          <div className="max-w-xl mx-auto">
-            <div className="relative w-full aspect-square">
-              {/* Diamond Grid */}
-              <div
-                className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1"
-                style={{ transform: "rotate(45deg) scale(0.7)" }}
-              >
-                {Array.from({ length: 9 }).map((_, index) => {
-                  const row = Math.floor(index / 3);
-                  const col = index % 3;
-                  return (
-                    <div
-                      key={index}
-                      className="overflow-hidden bg-muted relative"
-                    >
-                      <img
-                        src={asset8}
-                        alt=""
-                        className="absolute max-w-none object-cover"
-                        style={{
-                          width: "calc(300% + 0.5rem)",
-                          height: "calc(300% + 0.5rem)",
-                          left: `calc(-${col * 100}% - ${col * 0.25}rem)`,
-                          top: `calc(-${row * 100}% - ${row * 0.25}rem)`,
-                          transform: "rotate(-45deg) scale(1.5)",
-                        }}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+        {/* Hero Image */}
+        <section className="w-full">
+          <img
+            src={heroImage}
+            alt="Hero"
+            className="w-full h-auto"
+          />
         </section>
 
         {/* Featured Products */}
@@ -124,7 +97,7 @@ const Index = () => {
 
           {error && <p className="text-center text-red-500">Failed to load featured products.</p>}
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
             {products?.map((product) => (
               <ProductCard
                 key={product.id}

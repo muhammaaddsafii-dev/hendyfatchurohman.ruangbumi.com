@@ -28,8 +28,8 @@ const Footer = () => {
             </div>
 
             {/* Copyright */}
-            <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()}, HENDY FATCHUROHMAN
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              &copy; {new Date().getFullYear()}, HENDY FATCHUROHMAN | Collaboration with <a href="https://ruangbumi.com/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline decoration-dotted underline-offset-2">ruangbumi</a>
             </p>
           </div>
         </div>
