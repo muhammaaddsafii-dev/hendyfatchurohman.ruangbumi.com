@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Search, ShoppingBag, Moon, Sun, Menu, X } from "lucide-react";
+import { Search, ShoppingBag, Moon, Sun, Menu, X, User } from "lucide-react";
 import { useState } from "react";
 
 const Header = () => {
@@ -58,6 +58,9 @@ const Header = () => {
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
+            <a href="http://127.0.0.1:8000/admin/login" className="p-2 hover:bg-muted rounded-full transition-colors">
+              <User className="w-4 h-4" />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,9 +90,6 @@ const Header = () => {
             ))}
             <div className="flex items-center justify-center gap-6 pt-4 border-t border-border mt-2">
               <button className="p-2 hover:bg-muted rounded-full transition-colors">
-                <Search className="w-5 h-5" />
-              </button>
-              <button className="p-2 hover:bg-muted rounded-full transition-colors">
                 <ShoppingBag className="w-5 h-5" />
               </button>
               <button
@@ -98,6 +98,9 @@ const Header = () => {
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+              <a href="http://127.0.0.1:8000/admin/login" className="p-2 hover:bg-muted rounded-full transition-colors">
+                <User className="w-5 h-5" />
+              </a>
             </div>
           </nav>
         </div>
