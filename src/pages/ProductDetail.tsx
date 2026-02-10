@@ -23,7 +23,7 @@ const ProductDetail = () => {
         queryKey: ["product", id],
         queryFn: async () => {
             if (!id) throw new Error("No ID provided");
-            const response = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+            const response = await fetch(`https://be-hendy-sketch-278881327745.asia-southeast1.run.app/api/products/${id}`);
             if (!response.ok) {
                 if (response.status === 404) {
                     throw new Error("Product not found");

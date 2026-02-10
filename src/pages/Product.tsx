@@ -32,7 +32,7 @@ const Product = () => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/products");
+      const response = await fetch("https://be-hendy-sketch-278881327745.asia-southeast1.run.app/api/products");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

@@ -17,7 +17,7 @@ const About = () => {
   const { data: profile, isLoading, error } = useQuery({
     queryKey: ["about"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/about");
+      const response = await fetch("https://be-hendy-sketch-278881327745.asia-southeast1.run.app/api/about");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

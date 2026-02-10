@@ -24,7 +24,7 @@ const Research = () => {
   const { data: researchPapers, isLoading, error } = useQuery({
     queryKey: ["publications"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/publications");
+      const response = await fetch("https://be-hendy-sketch-278881327745.asia-southeast1.run.app/api/publications");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

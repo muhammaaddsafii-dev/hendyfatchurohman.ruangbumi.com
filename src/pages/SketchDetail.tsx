@@ -35,7 +35,7 @@ const SketchDetail = () => {
         queryKey: ["sketch", id],
         queryFn: async () => {
             if (!id) throw new Error("No ID provided");
-            const response = await fetch(`http://127.0.0.1:8000/api/sketches/${id}`);
+            const response = await fetch(`https://be-hendy-sketch-278881327745.asia-southeast1.run.app/api/sketches/${id}`);
             if (!response.ok) {
                 if (response.status === 404) {
                     throw new Error("Sketch not found");
