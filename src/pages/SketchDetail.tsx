@@ -16,6 +16,15 @@ L.Icon.Default.mergeOptions({
     shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
+const redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
 interface Sketch {
     id: number;
     title: string;
@@ -153,7 +162,7 @@ const SketchDetail = () => {
                                         attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a>'
                                         url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
                                     />
-                                    <Marker position={[sketch.latitude, sketch.longitude]}>
+                                    <Marker position={[sketch.latitude, sketch.longitude]} icon={redIcon}>
                                         <Popup>{sketch.title}</Popup>
                                     </Marker>
                                 </MapContainer>
