@@ -25,7 +25,7 @@ import asset6 from "@/assets/asset6.jpg";
 import asset7 from "@/assets/asset7.jpg";
 import asset8 from "@/assets/asset8.jpg";
 import asset9 from "@/assets/asset9.jpg";
-import heroImage from "@/assets/heroku.png";
+import heroImage from "@/assets/herokuy.png";
 
 interface Product {
   id: number;
@@ -83,7 +83,7 @@ const Index = () => {
         {/* Hero Image */}
         <section className="w-full">
           <img
-            src={heroImage}
+            src="https://s3.ap-southeast-1.amazonaws.com/cdn.ruangbumi.com/assets/herokuyy.png"
             alt="Hero"
             className="w-full h-auto"
           />
